@@ -1,4 +1,4 @@
-class SignInUpLocators {
+class SignUpLocators {
     constructor() {
         this.first_Name_Input = '//input[@id="register.firstName"]';
         this.last_Name_Input = '//input[@id="register.lastName"]';
@@ -7,8 +7,9 @@ class SignInUpLocators {
         this.register_checkPwd = '//input[@id="register.checkPwd"]';
         this.checkbox_confirmation = '//*[@id="registerChkTermsConditions"]';
         this.registrationBtn = '//*[@id="registerForm"]/div[11]/button';
+        this.errorMessage = '//*[@id="email.errors"]';
 
     }
 
 }
-module.exports = new SignInUpLocators()
+module.exports = new SignUpLocators()

@@ -1,11 +1,15 @@
 const Base = require('../Base')
-const mainLoc = require('./MainLocators')
+const mainLocators = require('./MainLocators')
 class MainPage extends Base{
 visitMainPage(){
     this.visitUrl('https://electronics-2005.aimprosoft.com/electronics/en')
 }
 clickOnRegistrationBtn(){
-    this.getElemByXpath(mainLoc.registration_Btn).click({force:true})
+    this.getElemByXpath(mainLocators.registration_Btn).click({force:true})
+
+}
+productSearch(productName){
+    this.typeTxt(mainLocators.search_Input, productName)
 }
 
 }

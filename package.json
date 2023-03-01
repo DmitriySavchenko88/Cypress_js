@@ -1,0 +1,27 @@
+{
+  "name": "mycy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cypress": "^12.3.0",
+    "lorem-ipsum": "^2.0.8",
+    "mocha": "^10.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DmitriySavchenko88/myCy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DmitriySavchenko88/myCy/issues"
+  },
+  "homepage": "https://github.com/DmitriySavchenko88/myCy#readme",
+  "devDependencies": {
+    "cypress-xpath": "^2.0.1"
+  }
+}

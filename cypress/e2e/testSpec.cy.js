@@ -1,10 +1,12 @@
 const mainPage = require('../pageObj/MainPage/MainPage')
 const signUp = require('../pageObj/SignInSignUpPage/SignUpPage')
 const signIn = require('../pageObj/SignInSignUpPage/SignInPage')
+const productListPage = require('../pageObj/ProductListPage/ProductListPage')
 const {randomWord} = require("../support/randomData");
 
 describe('Checking new user registration ', () => {
     beforeEach(() => {
+        cy.viewport(1440, 900)
         mainPage.visitMainPage()
         mainPage.clickOnRegistrationBtn()
 
@@ -45,15 +47,36 @@ describe('Checking new user registration ', () => {
 })
 describe('Checking product list page', () => {
     beforeEach(() => {
+        cy.viewport(1440, 900)
         mainPage.visitMainPage()
 
 
     })
     it('Verify that the item is displayed in the drop-down menu after entering the product name', () => {
         mainPage.productSearch('POWERSHOT A480');
-        cy.xpath('//em[@class=\'search-results-highlight\']').should('have.text', 'PowerShot A480PowerShot A480PowerShot A480PowerShot A480')
+        cy.xpath('//*[@id="ui-id-1"]').should('have.text', 'PowerShot A480PowerShot A480PowerShot A480PowerShot A480')
 
 
     })
 })
+describe('Checking a product list page', () =>{
+    beforeEach(() =>{
+        cy.viewport(1440, 900)
+        mainPage.visitMainPage()
 
+    })
+it('Adding an item to cart from product list page', () =>{
+
+    mainPage.clickOnProductNameBtn();
+    productListPage.addToCartItem();
+    cy.xpath('//*[@id="cboxTitle"]/div/span/div/div/span').should('have.text', 'Added to Your Shopping Cart')
+
+
+
+
+})
+
+
+
+
+})

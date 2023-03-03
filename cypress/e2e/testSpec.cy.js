@@ -2,6 +2,7 @@ const mainPage = require('../pageObj/MainPage/MainPage')
 const signUp = require('../pageObj/SignInSignUpPage/SignUpPage')
 const signIn = require('../pageObj/SignInSignUpPage/SignInPage')
 const productListPage = require('../pageObj/ProductListPage/ProductListPage')
+const cart = require('../pageObj/Cart/Cart')
 const {randomWord} = require("../support/randomData");
 
 describe('Checking new user registration ', () => {
@@ -40,7 +41,8 @@ describe('Checking new user registration ', () => {
     })
     it('Verify that the item is displayed in the drop-down menu after entering the product name', () => {
         mainPage.productSearch('POWERSHOT A480');
-        cy.xpath('//em[@class=\'search-results-highlight\']').should('have.text','PowerShot A480')
+        cy.wait(1000)
+        cy.xpath('(//em[@class=\'search-results-highlight\'])[1]').should('have.text', 'PowerShot A480')
 
 
     })
@@ -54,29 +56,38 @@ describe('Checking product list page', () => {
     })
     it('Verify that the item is displayed in the drop-down menu after entering the product name', () => {
         mainPage.productSearch('POWERSHOT A480');
+        cy.wait(1000)
         cy.xpath('//*[@id="ui-id-1"]').should('have.text', 'PowerShot A480PowerShot A480PowerShot A480PowerShot A480')
 
 
     })
 })
-describe('Checking a product list page', () =>{
-    beforeEach(() =>{
+describe('Checking a product list page', () => {
+    beforeEach(() => {
         cy.viewport(1440, 900)
         mainPage.visitMainPage()
 
     })
-it('Adding an item to cart from product list page', () =>{
+    it('Adding an item to cart from product list page', () => {
 
-    mainPage.clickOnProductNameBtn();
-    productListPage.addToCartItem();
-    cy.xpath('//*[@id="cboxTitle"]/div/span/div/div/span').should('have.text', 'Added to Your Shopping Cart')
+        mainPage.clickOnProductNameBtn();
+        productListPage.addToCartItem();
+
+        cy.xpath('//*[@id="cboxTitle"]/div/span/div/div/span').should('have.text', 'Added to Your Shopping Cart');
+        cy.wait(1000)
+        productListPage.clickOnChekoutBtn();
+        cy.xpath('//*[@class="col-xs-6 cart-totals-left grand-total"]').should('have.text', 'Order Total')
+        cy.xpath('//div[@class="col-xs-6 cart-totals-right text-right"]').should("contain", '$')
 
 
+    })
+    it.only('Verify that the user can change the quantity of items in the cart ', () => {
+        mainPage.clickOnProductNameBtn();
+        productListPage.addToCartItem();
+        productListPage.clickOnChekoutBtn();
+        cart.enterTheQuantityOfGoods(2)
 
-
-})
-
-
+    })
 
 
 })
